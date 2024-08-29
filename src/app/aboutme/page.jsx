@@ -107,7 +107,7 @@ export default function Resume() {
               <div
                 className="absolute inset-0"
                 style={{
-                  backgroundImage: `url('/schoolBg.jpg')`,
+                  backgroundImage: `url('/schoolbg.jpg')`,
                   filter: "blur(2px)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
@@ -120,7 +120,7 @@ export default function Resume() {
                     <p className="text-sm">Debsirin School</p>
                   </div>
                   <img
-                    src="/debsirinLogo.png"
+                    src="/Debsirinlogo.png"
                     alt="College Logo"
                     className="w-12 h-12 rounded-full"
                   />

@@ -21,6 +21,15 @@ export default function page() {
       setTimeout(() => setShowFireworks(true), 1000);
     }
   };
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/resume.pdf"; 
+    link.download = "MyResume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
     <>
       <FireworksComponent show={showFireworks} />
@@ -63,12 +72,15 @@ export default function page() {
           <br />
 
           <MotionButton
+            onClick={handleDownload}
             whileHover={{ scale: 0.95 }}
             initial="initial"
             animate="animate"
             variants={variants.moveUp}
-            transition={transition.moveUp}>
-            <DownloadIcon className="mr-2"></DownloadIcon>
+            transition={transition.moveUp}
+            className="flex items-center" // Add any Tailwind CSS classes if needed
+          >
+            <DownloadIcon className="mr-2" />
             Download CV
           </MotionButton>
 
