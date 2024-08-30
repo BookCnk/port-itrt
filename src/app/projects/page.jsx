@@ -108,7 +108,7 @@ export default function Projects() {
                   <TooltipTrigger asChild>
                     <button className="bg-accent p-2.5 rounded-full">
                       <Image
-                        src="/Github.svg"
+                        src="/GitHub.svg"
                         alt="GitHub"
                         width={40}
                         height={40}
