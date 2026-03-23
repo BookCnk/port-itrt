@@ -1,210 +1,134 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+
 import Image from "next/image";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
-import { transition, variants } from "@/utils/framer_variants";
+import { Button } from "@/components/ui/button";
+import { PROJECTS } from "@/utils/data";
+import { transition, variants, viewport } from "@/utils/framer_variants";
 import { MotionDiv } from "@/utils/motionTags";
-
-const projects = [
-  {
-    title: "Password Generator",
-    desc: "It's feature two main functionality: a Password Generator and a Password Checker. The Password Generator allows users to create secure, customized passwords based on selected criteria, while the Password Checker evaluates the strength of entered passwords against common security standards.",
-    category: "frontend",
-    linkgit: "",
-    linkdemo: "https://int203-project-password-secure.vercel.app/",
-    image: "/proj2.png",
-    stack: ["vue"],
-  },
-
-  {
-    title: "Markdown-parser",
-    desc: "It's a markdown editor aims to create, edit, manage markdown document.",
-    category: "Fronend, Backend",
-    linkgit: "",
-    linkdemo: "https://project-2-sec-1-markdown-parser.vercel.app/",
-    image: "/proj1.png",
-    stack: ["vue", "json-server"],
-  },
-  {
-    title: "Kanban board",
-    desc: "an agile project management tool designed to help visualize work, limit work-in-progress, and maximize efficiency (or flow)",
-    category: "backend",
-    linkgit: "",
-    linkdemo: "http://intproj23.sit.kmutt.ac.th/sy1/login",
-    image: "/proj3.png",
-    stack: ["Java", "Vue", "JWT", "MYSQL", "Docker "],
-  },
-];
+import { ExternalLink, Github, Lock } from "lucide-react";
 
 export default function Projects() {
-  const [currentProject, setCurrentProject] = useState(projects[0]);
-  const [swiper, setSwiper] = useState(null);
+  const projectCount = String(PROJECTS.length).padStart(2, "0");
 
-  const onSlideChange = (item) => {
-    setCurrentProject(projects[item?.activeIndex]);
-  };
-  const index =
-    projects.findIndex((item) => item.title === currentProject?.title) + 1;
-
-  const nexto = () => {
-    swiper.slideNext();
-  };
-  const prev = () => {
-    swiper.slidePrev();
-  };
   return (
-    <div className="grid place-items-center lg:pt-0 sm:pt-32 pt-20 min-h-screen container">
-      <div className="mt-12">
+    <section className="px-4 pb-16 pt-32 md:pt-40">
+      <div className="mx-auto max-w-6xl space-y-24 md:space-y-32">
         <MotionDiv
-          initial="initial"
-          animate="animate"
-          variants={variants.moveUp}
-          transition={transition.moveUp}
-          className="text-center mb-10 ">
-          <h3>
-            {" "}
-            My <span>Projects</span>
-          </h3>
+           initial="initial"
+           whileInView="animate"
+           viewport={viewport}
+           variants={variants.staggerContainer}
+           className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+           <MotionDiv variants={variants.revealUp} transition={transition.smooth}>
+             <span className="section-eyebrow">Selected Projects</span>
+             <h2 className="mt-5 max-w-3xl text-foreground">
+               A deeper look at the work I've built.
+             </h2>
+             <p className="mt-4 max-w-2xl">
+               Each project is presented as a featured case with a clear overview of the tech stack, key takeaways, and live references.
+             </p>
+           </MotionDiv>
         </MotionDiv>
-        <MotionDiv
-          initial="initial"
-          animate="animate"
-          variants={variants.moveDown}
-          transition={transition.moveDown}
-          className="flex lg:flex-row  flex-col-reverse lg:gap-0 gap-10 lg:pb-0 pb-7 items-center  w-full">
-          <div className="flex-1 space-y-3">
-            <h2 className="text-6xl font-semibold text-primary">
-              {index < 10 ? `0${index}` : index}
-            </h2>
-            <h3>{currentProject?.title}</h3>
-            <p className="w-9/12 text-accent-foreground">
-              {currentProject?.desc}
-            </p>
-            <div className="mt-2 text-primary font-semibold tracking-wider space-x-2">
-              {currentProject?.stack?.map((item) => {
-                return (
-                  <Badge
-                    key={item}
-                    variant={"outline"}
-                    className="text-primary text-base">
-                    {item}
-                  </Badge>
-                );
-              })}
-            </div>
-            <br />
-            <div className="flex gap-x-3">
-              <TooltipProvider delayDuration={200}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button className="bg-accent p-2.5 rounded-full">
-                      <Image
-                        src="/GitHub.svg"
-                        alt="GitHub"
-                        width={40}
-                        height={40}
-                      />
-                    </button>
-                  </TooltipTrigger>
 
-                  <TooltipContent>
-                    <p>Github</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              <TooltipProvider delayDuration={200}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button className="bg-accent p-2.5 rounded-full">
+        <div className="space-y-24 md:space-y-32">
+          {PROJECTS.map((project, index) => {
+            const projectNum = String(index + 1).padStart(2, "0");
+            const hasRepository = Boolean(project.linkgit);
+            const isEven = index % 2 === 0;
+
+            return (
+              <MotionDiv
+                key={project.id}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ ...viewport, margin: "-100px" }}
+                variants={variants.staggerContainer}
+                className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr] lg:items-center">
+                
+                {/* Details Side */}
+                <MotionDiv
+                  variants={isEven ? variants.revealRight : variants.revealLeft}
+                  transition={transition.smooth}
+                  className={cn("section-shell p-6 md:p-10", !isEven && "lg:order-last")}>
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-sm uppercase tracking-[0.28em] text-primary/80">
+                        {project.category}
+                      </p>
+                      <h2 className="mt-3 text-foreground">{project.title}</h2>
+                    </div>
+
+                    <div className="chip shrink-0">
+                      {projectNum} / {projectCount}
+                    </div>
+                  </div>
+
+                  <p className="mt-4 text-base leading-relaxed max-w-2xl">{project.desc}</p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.stack.map((item) => (
+                      <Badge key={item} variant="outline">
+                        {item}
+                      </Badge>
+                    ))}
+                  </div>
+
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    {hasRepository ? (
+                      <Button asChild variant="outline">
+                        <a
+                          href={project.linkgit}
+                          target="_blank"
+                          rel="noopener noreferrer">
+                          <Github className="mr-2 h-4 w-4" />
+                          View Code
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button variant="plain" size="sm" disabled>
+                        <Lock className="mr-2 h-4 w-4" />
+                        Private Repo
+                      </Button>
+                    )}
+
+                    <Button asChild>
                       <a
-                        href={currentProject?.linkdemo} // Correct syntax for href
+                        href={project.linkdemo}
                         target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex" // Ensuring the anchor wraps properly
-                      >
-                        <Image
-                          src="/open.svg"
-                          alt="github"
-                          width={40}
-                          height={40}
-                        />
+                        rel="noopener noreferrer">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Live Demo
                       </a>
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Live Preview</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
-          </div>
-          <div className="flex-1 flex items-center flex-col">
-            <Swiper
-              // slidesPerView={1.4}
-              breakpoints={{
-                // when window width is <= 499px
-                499: {
-                  slidesPerView: 1,
-                },
-                // when window width is <= 999px
-                999: {
-                  slidesPerView: 1.4,
-                },
-              }}
-              spaceBetween={20}
-              className="w-full md:max-w-lg max-w-[250px]"
-              onSlideChange={onSlideChange}
-              onSwiper={(s) => {
-                setSwiper(s);
-              }}>
-              {projects.map((project, i) => {
-                return (
-                  <SwiperSlide
-                    key={project.title}
-                    className={cn(index - 1 !== i && "opacity-45", "")}>
+                    </Button>
+                  </div>
+                </MotionDiv>
+                {/* Image Side */}
+                <MotionDiv
+                  variants={isEven ? variants.revealLeft : variants.revealRight}
+                  transition={transition.slow}
+                  className="relative group overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.05] shadow-[0_30px_90px_-46px_rgba(0,0,0,0.9)] backdrop-blur-xl">
+                  <div className="relative aspect-[5/4] overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.title}
-                      width={350}
-                      height={350}
-                      className="object-contain"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-            <div className="flex ml-6 mt-4 gap-x-4">
-              <button onClick={prev} disabled={index === 1}>
-                <Image
-                  src={"/prev.png"}
-                  alt={"prev"}
-                  width={55}
-                  height={55}
-                  className={cn("cursor-pointer")}
-                />
-              </button>
-              <button onClick={nexto} disabled={index === projects.length}>
-                <Image
-                  src={"/next.png"}
-                  alt={"next"}
-                  width={55}
-                  height={55}
-                  className={cn("cursor-pointer")}
-                />
-              </button>
-            </div>
-          </div>
-        </MotionDiv>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
+                    <div className="absolute left-4 top-4">
+                      <Badge variant="outline">{project.category}</Badge>
+                    </div>
+                  </div>
+                </MotionDiv>
+
+              </MotionDiv>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,35 +1,50 @@
+const ease = [0.22, 1, 0.36, 1];
+
+export const viewport = {
+  once: true,
+  amount: 0.2,
+};
+
 export const variants = {
-  scale: {
-    initial: { scale: 0.5, opacity: 0 },
-    animate: { scale: 1, opacity: 1 },
+  scaleIn: {
+    initial: { opacity: 0, scale: 0.9, filter: "blur(18px)" },
+    animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
   },
-  moveUp: {
-    initial: { y: 20, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
+  revealUp: {
+    initial: { opacity: 0, y: 40, filter: "blur(14px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
   },
-  moveDown: {
-    initial: { y: -20, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
+  revealDown: {
+    initial: { opacity: 0, y: -36, filter: "blur(14px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
   },
-  moveLeft: {
-    initial: { x: 860, opacity: 0 },
-    animate: { x: 0, opacity: 1 },
+  revealLeft: {
+    initial: { opacity: 0, x: -48, filter: "blur(14px)" },
+    animate: { opacity: 1, x: 0, filter: "blur(0px)" },
   },
-  moveRight: {
-    initial: { x: -20, opacity: 0 },
-    animate: { x: 0, opacity: 1 },
+  revealRight: {
+    initial: { opacity: 0, x: 48, filter: "blur(14px)" },
+    animate: { opacity: 1, x: 0, filter: "blur(0px)" },
   },
-  rise: {
+  fade: {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
+  },
+  staggerContainer: {
+    initial: { opacity: 0 },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.14,
+        delayChildren: 0.08,
+      },
+    },
   },
 };
 
 export const transition = {
-  scale: { duration: 0.9 },
-  moveUp: { duration: 0.1, delay: 1 },
-  moveDown: { duration: 0.9, delay: 1 },
-  moveLeft: { duration: 0.9 },
-  moveRight: { duration: 0.9 },
-  rise: { duration: 2 },
+  smooth: { duration: 0.85, ease },
+  slow: { duration: 1.2, ease },
+  snappy: { duration: 0.55, ease },
+  delayed: { duration: 0.85, ease, delay: 0.12 },
 };

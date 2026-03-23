@@ -4,22 +4,26 @@
 
 @layer base {
   :root {
-    --background: 246 46% 37%;
-    --foreground: 210 40% 96.1%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 42 79% 54%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --accent: 247 50% 28%;
-    --accent-foreground: 246 64% 75%;
-    --border: 247 91% 68%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-    --destructive: 0 96% 74%;
+    --background: 220 34% 8%;
+    --foreground: 36 46% 96%;
+    --card: 223 25% 13%;
+    --card-foreground: 36 46% 96%;
+    --popover: 223 25% 13%;
+    --popover-foreground: 36 46% 96%;
+    --primary: 26 96% 67%;
+    --primary-foreground: 220 35% 10%;
+    --secondary: 188 47% 23%;
+    --secondary-foreground: 36 46% 96%;
+    --accent: 221 24% 16%;
+    --accent-foreground: 189 53% 74%;
+    --muted: 221 23% 16%;
+    --muted-foreground: 219 15% 72%;
+    --border: 223 18% 26%;
+    --input: 223 21% 18%;
+    --ring: 26 96% 67%;
+    --radius: 1.25rem;
+    --destructive: 0 85% 66%;
+    --destructive-foreground: 36 46% 96%;
   }
 }
 
@@ -27,40 +31,84 @@
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(255, 153, 92, 0.16), transparent 32%),
+      radial-gradient(circle at 85% 20%, rgba(65, 190, 214, 0.14), transparent 28%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 24%),
+      linear-gradient(180deg, #080d17 0%, #0b111d 100%);
+    font-family: var(--font-body), sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display), sans-serif;
+    letter-spacing: -0.04em;
+  }
+
   h1 {
-    @apply md:text-7xl text-5xl !leading-[1.10];
+    @apply text-5xl leading-[0.92] md:text-7xl lg:text-[5.5rem];
   }
-  h1 span,
-  h3 span {
-    @apply text-primary;
+
+  h2 {
+    @apply text-4xl leading-tight md:text-5xl;
   }
 
   h3 {
-    @apply sm:text-3xl text-2xl font-semibold;
-  }
-  h5 {
-    @apply text-accent-foreground font-medium text-lg;
-  }
-  h6 {
-    @apply text-foreground font-medium text-lg;
+    @apply text-2xl font-semibold sm:text-3xl;
   }
 
-  li,
+  h5 {
+    @apply text-lg font-medium text-accent-foreground;
+  }
+
   p,
   button,
   a,
-  h4,
-  h5 {
-    @apply tracking-wider;
+  li {
+    @apply tracking-[0.01em];
   }
+
   p {
-    @apply sm:text-base text-sm;
+    @apply text-sm leading-7 text-muted-foreground sm:text-base;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary) / 0.35);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-white/10 bg-white/[0.05] backdrop-blur-2xl shadow-[0_24px_90px_-50px_rgba(0,0,0,0.9)];
+  }
+
+  .section-shell {
+    @apply glass-panel relative overflow-hidden rounded-[2rem];
+  }
+
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-muted-foreground;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-foreground/80;
   }
 }
 
 button:disabled {
-  @apply opacity-50;
+  @apply cursor-not-allowed opacity-50;
 }
