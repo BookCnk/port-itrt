@@ -92,7 +92,7 @@ export const PROJECTS = Object.freeze([
     category: "University Platform",
     linkgit: "",
     linkdemo: "https://grad.kmutt.ac.th/gradkmutt",
-    image: "/grad_kmutt.png",
+    image: "/kmutt-grad.png",
     stack: ["React", "Tailwind CSS", "User Management"],
     highlights: [
       "Secure login for students and staff",
@@ -107,7 +107,7 @@ export const PROJECTS = Object.freeze([
     category: "University Platform",
     linkgit: "",
     linkdemo: "https://admission-form.kmutt.ac.th/login",
-    image: "/admission_form.png",
+    image: "/admission-kmutt.png",
     stack: ["Next.js", "Tailwind CSS", "Google OAuth"],
     highlights: [
       "Google OAuth integration for secure and easy sign-in",
@@ -137,7 +137,7 @@ export const PROJECTS = Object.freeze([
     category: "Corporate/Healthcare Website",
     linkgit: "",
     linkdemo: "https://cannex-g.com/en",
-    image: "/cannex_g.png",
+    image: "/cannex.png",
     stack: ["Next.js", "Tailwind CSS", "Bilingual Support"],
     highlights: [
       "Detailed product listings and research insights",
