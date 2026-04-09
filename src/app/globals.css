@@ -43,7 +43,7 @@
       radial-gradient(circle at 85% 20%, rgba(65, 190, 214, 0.14), transparent 28%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 24%),
       linear-gradient(180deg, #080d17 0%, #0b111d 100%);
-    font-family: var(--font-body), sans-serif;
+    font-family: var(--font-body), var(--font-thai), sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -54,7 +54,7 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-display), sans-serif;
+    font-family: var(--font-display), var(--font-thai), sans-serif;
     letter-spacing: -0.04em;
   }
 

@@ -1,4 +1,4 @@
-import { Manrope, Syne } from "next/font/google";
+import { Kanit, Manrope, Syne } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Menu from "@/components/containers/Menu";
@@ -15,6 +15,12 @@ const syne = Syne({
   variable: "--font-display",
 });
 
+const kanit = Kanit({
+  subsets: ["latin", "thai"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-thai",
+});
+
 export const metadata = {
   title: "Chanakarn Kruehong | Portfolio",
   description: "A portfolio showcasing projects, background, and backend focus.",
@@ -27,7 +33,8 @@ export default function RootLayout({ children }) {
         className={cn(
           "min-h-screen bg-background text-foreground",
           manrope.variable,
-          syne.variable
+          syne.variable,
+          kanit.variable
         )}>
         <div className="pointer-events-none fixed inset-0 -z-20">
           <div className="absolute left-[6%] top-20 h-72 w-72 rounded-full bg-primary/20 blur-[110px]" />
